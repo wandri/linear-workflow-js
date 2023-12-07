@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build
-        run: npm run build --base-href workflow
+        run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload dist artifact
