@@ -1,0 +1,43 @@
+<div #svgContainer class="flex flex-col h-full w-full" id="svg-container"></div>
+<div
+  class="absolute flex flex-col top-4 right-4 border border-gray-200 rounded-lg w-10 h-30 bg-white shadow justify-center items-center">
+  @for (action of zoomActions;track action) {
+    <div (click)="applyManualZoom(action.type)"
+         [matTooltipShowDelay]="500"
+         [matTooltip]="action.description"
+         class="h-10 cursor-pointer hover:bg-[#F3F3F7] flex justify-center items-center w-full"
+         matRipple
+         matTooltipPosition="left">
+      <mat-icon [fontIcon]="action.icon"></mat-icon>
+    </div>
+  }
+</div>
+
+<div #contextMenu [style.left.px]="contextMenuOption().x"
+     [style.top.px]="contextMenuOption().y"
+     cdkMenu
+     class="fixed bg-white border flex flex-col">
+  @if (contextMenuStep() && contextMenuOpen()) {
+    <button (click)="openRenamingStepDialog(contextMenuStep()); closeMenu()" cdkMenuItem mat-button>
+      <mat-icon fontIcon="edit"></mat-icon>
+      <span>Rename</span>
+    </button>
+    <button (click)="deleteAndUpdateStep(contextMenuStep()); closeMenu()" cdkMenuItem mat-button>
+      <mat-icon fontIcon="delete"></mat-icon>
+      <span>Delete</span>
+    </button>
+  } @else if (contextMenuGroup() && contextMenuOpen()) {
+    <button (click)="openNewStepCreationDialog(contextMenuGroup()); closeMenu()" cdkMenuItem mat-button>
+      <mat-icon fontIcon="add"></mat-icon>
+      <span>Add a step</span>
+    </button>
+    <button (click)="openRenamingGroupDialog(contextMenuGroup()); closeMenu()" cdkMenuItem mat-button>
+      <mat-icon fontIcon="edit"></mat-icon>
+      <span>Rename</span>
+    </button>
+    <button (click)="deleteAndUpdateGroup(contextMenuGroup()); closeMenu()" cdkMenuItem mat-button>
+      <mat-icon fontIcon="delete"></mat-icon>
+      <span>Delete</span>
+    </button>
+  }
+</div>
