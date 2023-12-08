@@ -9,7 +9,7 @@ It integrates:
 
 ## Demo
 
-A demo is available at this link: [demo](https://wandri.github.io/workflow-js/)
+A demo is available at this link: [demo](https://wandri.github.io/linear-workflow-js/)
 
-![header](https://github.com/wandri/workflow-js/blob/master/src/assets/header.gif)
+![header](https://github.com/wandri/linear-workflow-js/blob/master/src/assets/header.gif)
 
