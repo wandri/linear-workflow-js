@@ -1,5 +1,5 @@
 import {createId} from "@paralleldrive/cuid2";
-import {STEP_DEFAULT_HEIGHT, STEP_WIDTH} from "../workflow-schema/diagram/utils/diagram.constants";
+import {STEP_DEFAULT_HEIGHT, STEP_WIDTH} from "../diagram/utils/diagram.constants";
 
 export class Step {
   id: string;

@@ -4,9 +4,8 @@ import {GROUP_DISTANCE_BETWEEN, GROUP_WIDTH, NEW_GROUP_CONTAINER_WIDTH,} from '.
 import {Subject} from 'rxjs';
 import {ManualZoomAction} from '../manual-zoom-action.enum';
 import {DiagramActionType} from '../interface/diagram-action-type.enum';
-import {Step} from '../../entities/step.entity';
 import {DiagramGroupsAbstract} from './diagram-group/diagram-groups-abstract';
-import {StepGroup} from "../../entities/step-group.entity";
+import {Step, StepGroup} from "../entities";
 
 export abstract class DiagramAbstract<
   T extends StepGroup,

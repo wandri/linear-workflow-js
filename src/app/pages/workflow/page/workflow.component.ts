@@ -1,13 +1,12 @@
 import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
-import {WorkflowSchemaComponent} from "../workflow-schema/workflow-schema.component";
-import {Workflow} from "../entities/workflow.entity";
 import {workflowDemo} from "./workflow.demo";
+import {Workflow, WorkflowLinearComponent,} from 'workflow-linear';
 
 @Component({
   selector: 'app-workflow',
   standalone: true,
   imports: [
-    WorkflowSchemaComponent
+    WorkflowLinearComponent
   ],
   templateUrl: './workflow.component.html',
   styles: [':host {@apply flex flex-col h-full w-full relative; }'],

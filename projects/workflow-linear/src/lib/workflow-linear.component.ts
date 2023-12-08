@@ -13,39 +13,37 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import {Workflow} from "../entities/workflow.entity";
-import {Step} from "../entities/step.entity";
-import {StepGroup} from "../entities/step-group.entity";
-import {ManualZoomAction} from "./manual-zoom-action.enum";
-import {Diagram} from "./diagram/diagram";
-import {selectById} from "./diagram/utils/diagram.utils";
-import {D3ZoomEvent} from "d3";
-import {DiagramActionType} from "./interface/diagram-action-type.enum";
-import {STEP_DISTANCE_BETWEEN} from "./diagram/utils/diagram.constants";
-import {MatIconModule} from "@angular/material/icon";
-import {MatTooltipModule} from "@angular/material/tooltip";
-import {MatRippleModule} from "@angular/material/core";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {generateName} from "../../../../shared/random";
 import {CdkMenu, CdkMenuItem} from "@angular/cdk/menu";
 import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatRippleModule} from "@angular/material/core";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {D3ZoomEvent} from "d3";
+import {ManualZoomAction} from "./manual-zoom-action.enum";
+import {Diagram} from "./diagram/diagram";
+import {STEP_DISTANCE_BETWEEN} from "./diagram/utils/diagram.constants";
+import {selectById} from "./diagram/utils/diagram.utils";
+import {DiagramActionType} from "./interface/diagram-action-type.enum";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {Step, StepGroup, Workflow} from "./entities";
+import {generateName} from "./shared/random";
 
 @Component({
-  selector: 'app-workflow-schema',
+  selector: 'lib-workflow-linear',
   standalone: true,
+  styles: [':host {@apply flex flex-col h-full w-full relative; }'],
+  templateUrl: './workflow-linear.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    MatIconModule,
-    MatTooltipModule,
-    MatRippleModule,
     CdkMenu,
     CdkMenuItem,
-    MatButtonModule
-  ],
-  templateUrl: './workflow-schema.component.html',
-  styles: [':host {@apply flex flex-col h-full w-full relative; }'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    MatButtonModule,
+    MatIconModule,
+    MatRippleModule,
+    MatTooltipModule
+  ]
 })
-export class WorkflowSchemaComponent implements OnInit, AfterViewInit, OnChanges {
+export class WorkflowLinearComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('stepDialog') stepDialog!: ElementRef;
   @ViewChild('contextMenu') contextMenu!: CdkMenu;
   @ViewChild('svgContainer') svgContainer!: ElementRef<SVGElement>;

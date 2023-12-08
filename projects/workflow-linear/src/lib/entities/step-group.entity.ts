@@ -7,9 +7,9 @@ import {
   GROUP_PADDING_TOP,
   GROUP_WIDTH,
   STEP_DISTANCE_BETWEEN
-} from "../workflow-schema/diagram/utils/diagram.constants";
-import {getSum} from "../workflow-schema/diagram/utils/diagram.utils";
-import {GRID_SIZE} from "../workflow-schema/diagram/utils/diagram-grid.utils";
+} from "../diagram/utils/diagram.constants";
+import {GRID_SIZE} from "../diagram/utils/diagram-grid.utils";
+import {getSum} from "../diagram/utils/diagram.utils";
 
 export class StepGroup {
   id: string;

@@ -30,10 +30,9 @@ import {
 import {selectAll, Selection} from 'd3';
 import {GRID_SIZE} from '../utils/diagram-grid.utils';
 
-import {Step} from '../../../entities/step.entity';
 import {EntityDiagram} from '../entity-diagram';
-import {StepGroup} from "../../../entities/step-group.entity";
 import {selectById, sortByPosition} from "../utils/diagram.utils";
+import {Step, StepGroup} from "../../entities";
 
 export abstract class DiagramGroupsAbstract<
   T extends StepGroup

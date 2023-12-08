@@ -1,6 +1,4 @@
-import {Workflow} from "../entities/workflow.entity";
-import {Entity} from "../../../../shared/entity";
-import {StepGroup} from "../entities/step-group.entity";
+import {Entity, StepGroup, Workflow} from "workflow-linear";
 
 const groups: StepGroup[] = [
   new StepGroup({name: 'Request a Software', position: 0, steps: []})

@@ -1,8 +1,8 @@
 import {StepGroup} from './step-group.entity';
 import {Step} from "./step.entity";
-import {GROUP_PADDING_TOP, STEP_DISTANCE_BETWEEN} from "../workflow-schema/diagram/utils/diagram.constants";
-import {GRID_SIZE} from "../workflow-schema/diagram/utils/diagram-grid.utils";
-import {getSum} from "../workflow-schema/diagram/utils/diagram.utils";
+import {GROUP_PADDING_TOP, STEP_DISTANCE_BETWEEN} from "../diagram/utils/diagram.constants";
+import {GRID_SIZE} from "../diagram/utils/diagram-grid.utils";
+import {getSum} from "../diagram/utils/diagram.utils";
 
 export class StepGroupOverview extends StepGroup {
   constructor(group: {

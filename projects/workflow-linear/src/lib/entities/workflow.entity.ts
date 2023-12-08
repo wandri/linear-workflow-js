@@ -1,8 +1,8 @@
-import {Entity} from '../../../../shared/entity';
 import {StepGroup} from "./step-group.entity";
 import {Step} from "./step.entity";
-import {sortByPosition} from "../workflow-schema/diagram/utils/diagram.utils";
-import {STEP_DISTANCE_BETWEEN} from "../workflow-schema/diagram/utils/diagram.constants";
+import {Entity} from "../shared/entity";
+import {sortByPosition} from "../diagram/utils/diagram.utils";
+import {STEP_DISTANCE_BETWEEN} from "../diagram/utils/diagram.constants";
 
 export const defaultWorkflowName = 'Untitled';
 

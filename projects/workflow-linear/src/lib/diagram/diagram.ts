@@ -15,11 +15,10 @@ import {
 } from './utils/diagram.constants';
 import {DiagramGroups} from './diagram-group/diagram-groups';
 import {DiagramActionType} from '../interface/diagram-action-type.enum';
-import {Step} from '../../entities/step.entity';
 import {selectById} from './utils/diagram.utils';
 import {DiagramAbstract} from './diagram-abstract';
 import {GRID_SIZE} from './utils/diagram-grid.utils';
-import {StepGroup} from "../../entities/step-group.entity";
+import {Step, StepGroup} from "../entities";
 
 export class Diagram extends DiagramAbstract<StepGroup, DiagramGroups> {
   protected override diagramGroups: DiagramGroups = new DiagramGroups([]);

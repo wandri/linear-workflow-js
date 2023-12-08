@@ -29,9 +29,8 @@ import {select, selectAll, Selection} from 'd3';
 import {GRID_SIZE} from '../utils/diagram-grid.utils';
 
 import {selectById, sortByPosition} from '../utils/diagram.utils';
-import {Step} from '../../../entities/step.entity';
 import {DiagramGroupsAbstract} from './diagram-groups-abstract';
-import {StepGroup} from "../../../entities/step-group.entity";
+import {Step, StepGroup} from "../../entities";
 
 export class DiagramGroups extends DiagramGroupsAbstract<StepGroup> {
   constructor(groups: StepGroup[]) {
