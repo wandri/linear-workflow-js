@@ -1,6 +1,6 @@
 # Linear Workflow JS
 
-A simple workflow with cards, written in typescript and S3. Displayed with Angular and tailwind.
+A simple workflow with cards, written in typescript and D3. Displayed with Angular and tailwind.
 
 It integrates:
 
