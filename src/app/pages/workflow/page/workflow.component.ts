@@ -18,7 +18,7 @@ import {workflowMultiDemo} from "./workflow-multi.demo";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkflowComponent {
-  readonly display = signal<'linear' | 'multi'>('multi')
+  readonly display = signal<'linear' | 'multi'>('linear')
   readonly workflowLinear = signal<WorkflowLinear>(workflowLinearDemo);
   readonly workflowMulti = signal<WorkflowMulti>(workflowMultiDemo);
 }
