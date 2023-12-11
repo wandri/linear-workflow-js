@@ -35,32 +35,6 @@ export abstract class DiagramAbstract<
 
   abstract createDiagramGroups(groups: T[]): U;
 
-  init(
-    width: number,
-    height: number,
-    wrapper: Selection<HTMLElement, undefined, Element, undefined>,
-    groups: T[]
-  ): void {
-    this.width = width;
-    this.height = height;
-    if (wrapper) {
-      this.svg = wrapper
-        .append<SVGElement>('svg')
-        .attr('viewBox', [0, 0, this.width, this.height])
-        .attr('width', this.width)
-        .attr('height', this.height);
-
-      this.svg.append('defs');
-      this.svg.on('click', (event: MouseEvent) =>
-        this.sendClickOnGridAndStopPropagation(event)
-      );
-    }
-
-    this.createGridAndGlobalZoom();
-    this.createContentContainer(groups);
-    this.update(groups, true, 0);
-  }
-
   update(groups: T[], withZoom = false, animationDuration = 200): void {
     this.generateContent(groups);
     if (withZoom) {

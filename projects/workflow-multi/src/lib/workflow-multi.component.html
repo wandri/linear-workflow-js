@@ -22,22 +22,14 @@
       <mat-icon fontIcon="edit"></mat-icon>
       <span>Rename</span>
     </button>
-    <button (click)="deleteAndUpdateStep(contextMenuOption().step); closeMenu()" cdkMenuItem mat-button>
+    <button (click)="deleteStepAndUpdate(contextMenuOption().step); closeMenu()" cdkMenuItem mat-button>
       <mat-icon fontIcon="delete"></mat-icon>
       <span>Delete</span>
     </button>
-  } @else if (isContextGroupOpened()) {
-    <button (click)="openNewStepCreationDialog(contextMenuOption().group); closeMenu()" cdkMenuItem mat-button>
-      <mat-icon fontIcon="add"></mat-icon>
-      <span>Add a step</span>
-    </button>
-    <button (click)="openRenamingGroupDialog(contextMenuOption().group); closeMenu()" cdkMenuItem mat-button>
+  } @else if (isContextConnectorOpened()) {
+    <button (click)="deleteAndUpdateConnector(contextMenuOption().connector); closeMenu()" cdkMenuItem mat-button>
       <mat-icon fontIcon="edit"></mat-icon>
       <span>Rename</span>
-    </button>
-    <button (click)="deleteAndUpdateGroup(contextMenuOption().group); closeMenu()" cdkMenuItem mat-button>
-      <mat-icon fontIcon="delete"></mat-icon>
-      <span>Delete</span>
     </button>
   }
 </div>

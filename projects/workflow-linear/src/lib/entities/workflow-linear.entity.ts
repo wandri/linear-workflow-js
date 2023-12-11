@@ -1,12 +1,12 @@
 import {StepGroup} from "./step-group.entity";
 import {Step} from "./step.entity";
-import {Entity} from "../shared/entity";
+import {Entity} from "../shared";
 import {sortByPosition} from "../diagram/utils/diagram.utils";
 import {STEP_DISTANCE_BETWEEN} from "../diagram/utils/diagram.constants";
 
 export const defaultWorkflowName = 'Untitled';
 
-export class Workflow extends Entity {
+export class WorkflowLinear extends Entity {
   protected groups: StepGroup[] = [];
   protected name = defaultWorkflowName;
 
@@ -16,8 +16,8 @@ export class Workflow extends Entity {
     this.name = workflow.name;
   }
 
-  static new(groups: StepGroup[]): Workflow {
-    return new Workflow({
+  static new(groups: StepGroup[]): WorkflowLinear {
+    return new WorkflowLinear({
       name: defaultWorkflowName,
       ...Entity.createNew(),
       groups: groups,
@@ -99,8 +99,8 @@ export class Workflow extends Entity {
     return this.name === defaultWorkflowName;
   }
 
-  clone(): Workflow {
-    return new Workflow({
+  clone(): WorkflowLinear {
+    return new WorkflowLinear({
       id: this.id,
       name: this.name,
       updatedAt: this.updatedAt,
@@ -109,7 +109,7 @@ export class Workflow extends Entity {
     });
   }
 
-  isEqual(workflow: Workflow): boolean {
+  isEqual(workflow: WorkflowLinear): boolean {
     if (
       this.id !== workflow.id ||
       this.name !== workflow.name ||

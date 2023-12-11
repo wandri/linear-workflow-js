@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  computed,
   DestroyRef,
   ElementRef,
   HostListener,
@@ -25,8 +26,8 @@ import {STEP_DISTANCE_BETWEEN} from "./diagram/utils/diagram.constants";
 import {selectById} from "./diagram/utils/diagram.utils";
 import {DiagramActionType} from "./interface/diagram-action-type.enum";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import {Step, StepGroup, Workflow} from "./entities";
-import {generateName} from "./shared/random";
+import {Step, StepGroup, WorkflowLinear} from "./entities";
+import {generateName} from "./shared";
 
 @Component({
   selector: 'lib-workflow-linear',
@@ -44,14 +45,21 @@ import {generateName} from "./shared/random";
   ]
 })
 export class WorkflowLinearComponent implements OnInit, AfterViewInit, OnChanges {
-  @ViewChild('stepDialog') stepDialog!: ElementRef;
   @ViewChild('contextMenu') contextMenu!: CdkMenu;
   @ViewChild('svgContainer') svgContainer!: ElementRef<SVGElement>;
-  @Input() workflow: Workflow = Workflow.new([]);
-  readonly contextMenuOpen = signal<boolean>(false);
-  readonly contextMenuStep = signal<Step | undefined>(undefined);
-  readonly contextMenuGroup = signal<StepGroup | undefined>(undefined);
-  readonly contextMenuOption = signal<{ x: number; y: number }>({x: 0, y: 0});
+  @Input() workflow: WorkflowLinear = WorkflowLinear.new([]);
+  readonly contextMenuOption = signal<{
+    isOpened: boolean,
+    step?: Step,
+    group?: StepGroup,
+    position: { x: number; y: number }
+  }>(
+    {isOpened: false, step: undefined, group: undefined, position: {x: 0, y: 0}}
+  )
+
+  isContextStepOpened = computed<boolean>(() => this.contextMenuOption().isOpened && !!this.contextMenuOption().step)
+  isContextGroupOpened = computed<boolean>(() => this.contextMenuOption().isOpened && !!this.contextMenuOption().group)
+
   readonly zoomActions: {
     icon: string;
     type: ManualZoomAction;
@@ -104,38 +112,33 @@ export class WorkflowLinearComponent implements OnInit, AfterViewInit, OnChanges
 
   createStep(stepName: string, group: StepGroup): void {
     const position = group.steps.length;
-    const lastStep = group.steps[position - 1];
+    const lastStep = group.steps.at(-1);
+    let yPosition = 0; // Default y position
+
     if (lastStep) {
-      const y =
-        lastStep.getYPosition() + lastStep.getHeight() + STEP_DISTANCE_BETWEEN;
-      const newStep: Step = new Step({
-        name: stepName,
-        position,
-        y,
-        groupId: group.id,
-      });
-      this.workflow.addStepToGroup(newStep, group.id);
-      this.diagram.update(this.workflow.getGroups(), true);
-    } else {
-      const newStep: Step = new Step({
-        name: stepName,
-        position,
-        y: 0,
-        groupId: group.id,
-      });
-      this.workflow.addStepToGroup(newStep, group.id);
-      this.diagram.update(this.workflow.getGroups(), true);
+      yPosition = lastStep.getYPosition() + lastStep.getHeight() + STEP_DISTANCE_BETWEEN;
     }
+
+    const newStep: Step = new Step({
+      name: stepName,
+      position,
+      y: yPosition,
+      groupId: group.id,
+    });
+
+    this.workflow.addStepToGroup(newStep, group.id);
+    this.diagram.update(this.workflow.getGroups(), true);
   }
 
-  openRenamingStepDialog(step?: Step) {
+  openRenamingStepDialog(step?: Step): void {
+    // Change for real word step renaming
     if (step) {
       this.renameStep(step, generateName());
-
     }
   }
 
-  openRenamingGroupDialog(group?: StepGroup) {
+  openRenamingGroupDialog(group?: StepGroup): void {
+    // Change for real word group renaming
     if (group) {
       this.renameGroup(group, generateName());
     }
@@ -155,11 +158,7 @@ export class WorkflowLinearComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   closeMenu(): void {
-    this.contextMenuOpen.set(false);
-  }
-
-  onActiveZone(active: boolean): void {
-    this.contextMenuOpen.set(active && this.contextMenuOpen());
+    this.contextMenuOption.set({isOpened: false, step: undefined, group: undefined, position: {x: 0, y: 0}})
   }
 
   renameStep(step: Step, name: string): void {
@@ -214,23 +213,27 @@ export class WorkflowLinearComponent implements OnInit, AfterViewInit, OnChanges
       case DiagramActionType.CLICK_ON_GRID:
       case DiagramActionType.CONTEXT_MENU_ON_GRID:
       case DiagramActionType.ZOOM:
-        this.contextMenuOpen.set(false);
+        this.contextMenuOption.set({isOpened: false, step: undefined, group: undefined, position: {x: 0, y: 0}})
         break;
     }
   }
 
   private contextMenuOnGroup(event: MouseEvent, group: StepGroup): void {
-    this.contextMenuGroup.set(group);
-    this.contextMenuStep.set(undefined);
-    this.contextMenuOption.set({x: event.clientX, y: event.clientY});
-    this.contextMenuOpen.set(true);
+    this.contextMenuOption.set({
+      isOpened: true,
+      step: undefined,
+      group: group,
+      position: {x: event.clientX, y: event.clientY}
+    })
   }
 
   private contextMenuOnStep(event: MouseEvent, step: Step): void {
-    this.contextMenuStep.set(step);
-    this.contextMenuGroup.set(undefined);
-    this.contextMenuOption.set({x: event.clientX, y: event.clientY});
-    this.contextMenuOpen.set(true);
+    this.contextMenuOption.set({
+      isOpened: true,
+      step: step,
+      group: undefined,
+      position: {x: event.clientX, y: event.clientY}
+    })
   }
 
   private openNewGroupCreationDialog(): void {

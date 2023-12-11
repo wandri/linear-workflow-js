@@ -1,11 +1,20 @@
 <div
-  class="flex content-between justify-between h-[48px] p-2 border-b-2 items-center"
+  class="flex h-16 p-2 border-b-2 items-center gap-4"
 >
+  <button (click)="display.set('linear')" mat-stroked-button>Linear Workflow</button>
+  <button (click)="display.set('multi')" mat-stroked-button>Multi Workflow</button>
 </div>
-<div class="flex flex-grow relative">
-  <lib-workflow-linear
-    [workflow]="workflow()"
-    class="flex h-full w-full"
-  ></lib-workflow-linear>
+<div class="flex w-full h-[calc(100%-4rem)] relative overflow-hidden">
+  @if (display() === 'linear') {
+    <lib-workflow-linear
+      [workflow]="workflowLinear()"
+      class="flex h-full w-full"
+    ></lib-workflow-linear>
+  } @else if (display() === 'multi') {
+    <lib-workflow-multi
+      [workflow]="workflowMulti()"
+      class="flex h-full w-full"
+    ></lib-workflow-multi>
+  }
 </div>
 

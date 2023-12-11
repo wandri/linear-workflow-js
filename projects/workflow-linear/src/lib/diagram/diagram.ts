@@ -27,7 +27,7 @@ export class Diagram extends DiagramAbstract<StepGroup, DiagramGroups> {
   private initialClick: { x: number; y: number } = {x: 0, y: 0};
   private isDragDisabled = false;
 
-  override init(
+  init(
     width: number,
     height: number,
     wrapper: Selection<HTMLElement, undefined, Element, undefined>,
@@ -44,12 +44,8 @@ export class Diagram extends DiagramAbstract<StepGroup, DiagramGroups> {
 
       this.svg.append('defs');
       this.svg
-        .on('click', (event: MouseEvent) =>
-          this.sendClickOnGridAndStopPropagation(event)
-        )
-        .on('contextmenu', (event: MouseEvent) =>
-          this.sendContextMenuOnGridAndStopPropagation(event)
-        );
+        .on('click', (event: MouseEvent) => this.sendClickOnGridAndStopPropagation(event))
+        .on('contextmenu', (event: MouseEvent) => this.sendContextMenuOnGridAndStopPropagation(event));
     }
 
     this.createGridAndGlobalZoom();

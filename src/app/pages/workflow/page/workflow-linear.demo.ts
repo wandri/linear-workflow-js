@@ -1,4 +1,4 @@
-import {Entity, StepGroup, Workflow} from "workflow-linear";
+import {Entity, StepGroup, WorkflowLinear} from "workflow-linear";
 
 const groups: StepGroup[] = [
   new StepGroup({name: 'Request a Software', position: 0, steps: []})
@@ -18,4 +18,4 @@ const groups: StepGroup[] = [
     .addStep('Finalize request details')
 ]
 
-export const workflowDemo = new Workflow({...Entity.createNew(), groups: groups, name: 'PO creation'})
+export const workflowLinearDemo = new WorkflowLinear({...Entity.createNew(), groups: groups, name: 'PO creation'})

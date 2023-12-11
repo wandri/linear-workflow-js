@@ -26,6 +26,9 @@
     "paths": {
       "workflow-linear": [
         "./dist/workflow-linear"
+      ],
+      "workflow-multi": [
+        "./dist/workflow-multi"
       ]
     }
   },
