@@ -19,8 +19,6 @@ export const STEP_ANCHOR_CROSS_SELECTOR = 'step-anchor-cross';
 export const STEP_PADDING = 4 * 2;
 export const STEP_IMAGE_SIZE = 14 * 2;
 export const STEP_FONT_SIZE_MAIN_TEXT_CREATION = 12 * 2;
-export const STEP_FONT_SIZE_MAIN_USER = 8 * 2;
-
 export const STEP_ELEMENT_SELECTOR = 'step-selector'
 export const STEP_AREA_SELECTOR = 'step-area-selector'
 

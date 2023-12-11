@@ -20,8 +20,7 @@ import {Cursor} from "../interface/cursor.enum";
 import {selectById} from "./utils/diagram.utils";
 import {StepWithAnchor} from "../interface/step-with-anchor.class";
 import {EntityDiagram} from "./entity-diagram";
-import {Connector} from "../entities/connector.entity";
-import {Step, WorkflowMulti} from "../entities";
+import {Connector, Step, WorkflowMulti} from "../entities";
 
 export class DiagramConnectors extends EntityDiagram {
   private connectors: Connector[] = [];

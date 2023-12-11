@@ -36,10 +36,6 @@ export class Step {
     this.name = name;
   }
 
-  update(step: Partial<Step>) {
-    Object.assign(this, step);
-  }
-
   getHeight(): number {
     return STEP_DEFAULT_HEIGHT;
   }
@@ -64,6 +60,10 @@ export class Step {
     return STEP_WIDTH;
   }
 
+  getPosition(): number {
+    return this.position;
+  }
+
   setDefaultPositionY(y: number): void {
     this.defaultYPosition = y;
   }
@@ -82,10 +82,6 @@ export class Step {
 
   setDefaultYPosition() {
     this.y = this.defaultYPosition;
-  }
-
-  getPosition(): number {
-    return this.position;
   }
 
   clone(): Step {

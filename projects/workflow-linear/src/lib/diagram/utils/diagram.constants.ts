@@ -2,7 +2,6 @@ import {GRID_SIZE} from './diagram-grid.utils';
 import {symbol, symbolCross} from 'd3';
 
 export type Direction = 'right' | 'left' | 'top' | 'bottom';
-export type DirectionWithNone = Direction | 'none';
 
 // COLORS
 export const GROUP_DEFAULT_BACKGROUND_COLOR = 'rgba(213,210,205,0.3)';
@@ -44,11 +43,6 @@ export const GROUP_PADDING_BOTTOM = GRID_SIZE * 4;
 export const GROUP_DISTANCE_BETWEEN = GRID_SIZE * 4;
 export const NEW_GROUP_CONTAINER_WIDTH = GRID_SIZE * 6;
 export const STEP_DISTANCE_BETWEEN = GRID_SIZE * 2;
-export const STEP_FONT_SIZE_MAIN_USER = 8 * 2;
-export const STEP_ANCHOR_ACTIVE = STEP_STROKE_SELECTED_COLOR;
-export const STEP_ANCHOR_BACKGROUND = STEP_STROKE_SELECTED_COLOR;
-
-export const STEP_IMAGE_SIZE = 14 * 2;
 export const STEP_FONT_SIZE_MAIN_TEXT_CREATION = 12 * 2;
 export const STEP_FONT_SIZE_STEP_CREATION_BUTTON = 10 * 2;
 

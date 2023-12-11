@@ -2,9 +2,7 @@ import {Step} from "./step.entity";
 import {Connector} from "./connector.entity";
 import {computeLayoutWithD3Dag} from "../diagram/utils/diagram.utils";
 import {getConnectorsLinkedToOneStep} from "../diagram/utils/util-diagram";
-import {checkWorkflowValidity, isCyclic} from "../diagram/utils/util-diagram-validity";
-
-export const defaultWorkflowName = 'Untitled';
+import {isCyclic} from "../diagram/utils/util-diagram-validity";
 
 export class WorkflowMulti {
   protected steps: Step[] = [];
@@ -75,14 +73,6 @@ export class WorkflowMulti {
     return this.connectors.find(connector => connector.id === id);
   }
 
-  removeConnectorByStartId(id: string): void {
-    this.connectors = this.connectors.filter((connector) => connector.startId !== id);
-  }
-
-  isDefined(): boolean {
-    return this.steps.length > 0
-  }
-
   isCyclic(customConnectors?: Connector[]): { isValid: boolean, cyclicStepIds: string[] } {
     return isCyclic(this.steps.map(step => step.id), customConnectors || this.connectors)
   }
@@ -95,15 +85,8 @@ export class WorkflowMulti {
     return Math.min(...this.steps.map(step => step.y))
   }
 
-  workflowValidity(): { isValid: boolean, invalidStepIds: string[] } {
-    return checkWorkflowValidity(this.steps, this.connectors);
-  }
-
   getConnectorsLinkedToOneStep(stepId: string): Connector[] {
     return getConnectorsLinkedToOneStep<Connector>(stepId, this.connectors);
   }
 
-  getFirstStep(): Step | undefined {
-    return this.steps.find(step => step.isStart);
-  }
 }

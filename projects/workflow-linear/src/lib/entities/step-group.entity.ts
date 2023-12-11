@@ -133,22 +133,6 @@ export class StepGroup {
     return true;
   }
 
-  addStep(stepName: string): this {
-    const lastStep = this.steps.at(-1);
-    let y = 0;
-    if (lastStep) {
-      y = lastStep.getYPosition() + lastStep.getHeight() + STEP_DISTANCE_BETWEEN;
-    }
-    this.steps.push(new Step({
-      name: stepName,
-      position: this.steps.length,
-      y,
-      groupId: this.id,
-    }))
-    this.setDefaultYPosition();
-    return this;
-  }
-
   private updateStepTheoreticalXY() {
     this.steps.forEach((step) => {
       step.stepContainerX = this.getXPosition() + GROUP_PADDING;

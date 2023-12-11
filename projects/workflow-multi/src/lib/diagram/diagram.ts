@@ -9,8 +9,7 @@ import {Subject} from "rxjs";
 import {ManualZoomAction} from "../manual-zoom-action.enum";
 import {DiagramActionType} from "../interface/diagram-action-type.enum";
 import {StepWithAnchor} from "../interface/step-with-anchor.class";
-import {Step, WorkflowMulti} from "../entities";
-import {Connector} from "../entities/connector.entity";
+import {Connector, Step, WorkflowMulti} from "../entities";
 
 export class Diagram {
   selectedConnector?: Connector;

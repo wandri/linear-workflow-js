@@ -10,7 +10,6 @@ import {
   STEP_ELEMENT_SELECTOR,
   STEP_FONT_SIZE_MAIN_TEXT_CREATION,
   STEP_HEIGHT,
-  STEP_IMAGE_SIZE,
   STEP_PADDING,
   STEP_RECT_SELECTOR,
   STEP_STROKE_DEFAULT_COLOR,
@@ -269,41 +268,6 @@ export class DiagramSteps extends EntityDiagram {
       .attr('fill', STEP_BACKGROUND_COLOR)
       .attr('stroke', STEP_STROKE_DEFAULT_COLOR)
       .attr('stroke-width', 2);
-  }
-
-  private createImageSteps(): void {
-    this.stepElement
-      .append('image')
-      .attr('x', STEP_PADDING)
-      .attr('y', STEP_PADDING)
-      .attr('height', STEP_IMAGE_SIZE)
-      .attr('width', STEP_IMAGE_SIZE)
-      .attr('href', (step) => step.icon)
-      .attr('clip-path', 'inset(0% round 50%)');
-  }
-
-  private createTitleStep(): void {
-    this.stepElement.append("foreignObject")
-      .attr("width", this.width - STEP_PADDING * 2)
-      .attr("height", STEP_FONT_SIZE_MAIN_TEXT_CREATION * 2)
-      .attr('x', STEP_PADDING)
-      .attr('y', STEP_PADDING + STEP_IMAGE_SIZE + STEP_PADDING)
-      .append("xhtml:div")
-      .style("width", "100%")
-      .style("height", "100%")
-      .append("div")
-      .style("color", "#000")
-      .style("text-align", "center")
-      .style("width", "100%")
-      .style("display", "-webkit-box")
-      .style("-webkit-line-clamp", 2)
-      .style(" line-clamp", 2)
-      .style("-webkit-box-orient", "vertical")
-      .style("display", "-webkit-box")
-      .style("height", "100%")
-      .style("font-size", `${STEP_FONT_SIZE_MAIN_TEXT_CREATION}px`)
-      .style('font-weight', 500)
-      .html((step) => step.name)
   }
 
   private createTitleCreation(): void {

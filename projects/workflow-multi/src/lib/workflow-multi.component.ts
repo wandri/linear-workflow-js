@@ -154,7 +154,6 @@ export class WorkflowMultiComponent implements AfterViewInit, OnChanges, OnInit 
     }
     const newStep: Step = new Step(stepName, maxX, minY)
     this.workflow.addStep(newStep)
-    // this.stepNameForm.reset('');
     this.diagram.selectedStep = newStep;
     this.diagram.selectedConnector = undefined;
 
@@ -171,7 +170,6 @@ export class WorkflowMultiComponent implements AfterViewInit, OnChanges, OnInit 
   openRenamingStepDialog(step?: Step) {
     if (step) {
       this.renamingStep = step;
-      // this.stepNameForm.setValue(step.name);
     }
   }
 
@@ -202,21 +200,9 @@ export class WorkflowMultiComponent implements AfterViewInit, OnChanges, OnInit 
     this.contextMenuOption.set({isOpened: false, step: undefined, connector: undefined, position: {x: 0, y: 0}});
   }
 
-  renameStep(name: string): void {
-    if (this.renamingStep) {
-      this.workflow.getStepById(this.renamingStep?.id)?.rename(name)
-      // this.stepNameForm.reset('')
-      this.diagram.update(this.workflow, true);
-    }
-  }
 
   applyManualZoom(type: ManualZoomAction): void {
     this.diagram.applyManualZoom(type, this.workflow);
-  }
-
-  organizeSteps(): void {
-    this.workflow.reorder();
-    this.diagram.update(this.workflow, true, 0);
   }
 
 
@@ -225,7 +211,6 @@ export class WorkflowMultiComponent implements AfterViewInit, OnChanges, OnInit 
     console.log(this.svgContainer.nativeElement.clientWidth, this.svgContainer.nativeElement.clientHeight)
     this.diagram.init(this.svgContainer.nativeElement.clientWidth, this.svgContainer.nativeElement.clientHeight,
       selectById<HTMLElement, undefined>("svg-container"), this.workflow);
-    // self.clickOnStep.emit(step); TODO redo
   }
 
   private manageDiagramActions(
@@ -289,7 +274,6 @@ export class WorkflowMultiComponent implements AfterViewInit, OnChanges, OnInit 
           const firstStep = this.workflow.getStepById(selectedConnector.endId);
           if (firstStep && firstStep.isStart) {
           } else if (!cyclic.isValid) {
-            this.displayCyclingError(cyclic);
           } else {
             selectedConnector.startId = update.stepStart.id;
             selectedConnector.endId = update.stepEnd.id;
@@ -300,12 +284,6 @@ export class WorkflowMultiComponent implements AfterViewInit, OnChanges, OnInit 
     }
   }
 
-  private displayCyclingError(cyclic: { isValid: boolean; cyclicStepIds: string[] }): void {
-    const errorSteps = cyclic.cyclicStepIds
-      .map(id => this.workflow.getStepById(id))
-      .map(step => `<i>${step?.name}</i>`).join(', ')
-  }
-
   private createConnector(steps: { stepStart: Step, stepEnd: Step }): void {
     const newConnector = new Connector(steps.stepStart.id, steps.stepEnd.id);
 
@@ -314,7 +292,6 @@ export class WorkflowMultiComponent implements AfterViewInit, OnChanges, OnInit 
     const alreadyExist = this.workflow.getConnectors().some(connector => connector.endId === steps.stepEnd.id && connector.startId === steps.stepStart.id);
     if (firstStep && firstStep.isStart) {
     } else if (!cyclic.isValid) {
-      this.displayCyclingError(cyclic);
     } else if (!alreadyExist) {
       this.workflow.addConnector(newConnector);
       this.diagram.update(this.workflow);
