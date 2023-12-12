@@ -49,8 +49,9 @@ export class WorkflowMulti {
       .find(connector => connector.startId === startId && connector.endId === endId)
   }
 
-  addStep(step: Step): void {
+  addStep(step: Step): this {
     this.steps.push(step);
+    return this;
   }
 
   addConnector(connector: Connector): void {
